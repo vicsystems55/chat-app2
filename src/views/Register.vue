@@ -134,6 +134,8 @@ export default {
   methods: {
 
       
+
+      
       signup(values) {
 
              this.loading = true;

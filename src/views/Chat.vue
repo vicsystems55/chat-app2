@@ -58,55 +58,32 @@
                         <div class="block pull-x">
                             <!-- Online -->
                             <div class="block-content block-content-sm block-content-full bg-body-light">
-                                <span class="text-uppercase font-size-sm font-w700">Online</span>
+                                <span class="text-uppercase font-size-sm font-w700">Members</span>
                             </div>
                             <div class="block-content px-0">
                                 <ul class="nav-items">
-                                    <li>
+                                    <li v-for="person in persons" :key="person.id">
                                         <a class="media py-2" href="javascript:void(0)">
                                             <div class="mx-3 overlay-container">
                                                 <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar6.jpg" alt="">
                                                 <span class="overlay-item item item-tiny item-circle border border-2x border-white bg-success"></span>
                                             </div>
                                             <div class="media-body">
-                                                <div class="font-w600">Judy Ford</div>
-                                                <div class="font-size-sm text-muted">Photographer</div>
+                                                <div class="font-w600">{{person.name}}</div>
+                                                <div class="font-size-sm text-muted">{{person.email}}</div>
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="media py-2" href="javascript:void(0)">
-                                            <div class="mx-3 overlay-container">
-                                                <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar16.jpg" alt="">
-                                                <span class="overlay-item item item-tiny item-circle border border-2x border-white bg-success"></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-w600">Brian Cruz</div>
-                                                <div class="font-w400 font-size-sm text-muted">Web Designer</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="media py-2" href="javascript:void(0)">
-                                            <div class="mx-3 overlay-container">
-                                                <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar7.jpg" alt="">
-                                                <span class="overlay-item item item-tiny item-circle border border-2x border-white bg-success"></span>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-w600">Lori Moore</div>
-                                                <div class="font-w400 font-size-sm text-muted">Web Developer</div>
-                                            </div>
-                                        </a>
-                                    </li>
+                                   
                                 </ul>
                             </div>
                             <!-- Online -->
 
                             <!-- Busy -->
-                            <div class="block-content block-content-sm block-content-full bg-body-light">
+                            <div class="d-none block-content block-content-sm block-content-full bg-body-light">
                                 <span class="text-uppercase font-size-sm font-w700">Busy</span>
                             </div>
-                            <div class="block-content px-0">
+                            <div class="d-none block-content px-0">
                                 <ul class="nav-items">
                                     <li>
                                         <a class="media py-2" href="javascript:void(0)">
@@ -114,7 +91,7 @@
                                                 <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar4.jpg" alt="">
                                                 <span class="overlay-item item item-tiny item-circle border border-2x border-white bg-danger"></span>
                                             </div>
-                                            <div class="media-body">
+                                            <div class="d-none media-body">
                                                 <div class="font-w600">Laura Carr</div>
                                                 <div class="font-w400 font-size-sm text-muted">UI Designer</div>
                                             </div>
@@ -125,10 +102,10 @@
                             <!-- END Busy -->
 
                             <!-- Away -->
-                            <div class="block-content block-content-sm block-content-full bg-body-light">
+                            <div class="d-none block-content block-content-sm block-content-full bg-body-light">
                                 <span class="text-uppercase font-size-sm font-w700">Away</span>
                             </div>
-                            <div class="block-content px-0">
+                            <div class="d-none block-content px-0">
                                 <ul class="nav-items">
                                     <li>
                                         <a class="media py-2" href="javascript:void(0)">
@@ -159,10 +136,10 @@
                             <!-- END Away -->
 
                             <!-- Offline -->
-                            <div class="block-content block-content-sm block-content-full bg-body-light">
+                            <div class="d-none block-content block-content-sm block-content-full bg-body-light">
                                 <span class="text-uppercase font-size-sm font-w700">Offline</span>
                             </div>
-                            <div class="block-content px-0">
+                            <div class="d-none block-content px-0">
                                 <ul class="nav-items">
                                     <li>
                                         <a class="media py-2" href="javascript:void(0)">
@@ -321,7 +298,7 @@
                                     <button type="button" class="btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-plus"></i>
                                     </button>
-                                    <div class="dropdown-menu">
+                                    <div class="d-none dropdown-menu">
                                         <a class="dropdown-item" href="javascript:void(0)">
                                             <i class="fa fa-file-alt fa-fw mr-1"></i> Upload File
                                         </a>
@@ -336,7 +313,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="input-group-prepend d-none d-sm-flex">
+                                <div class=" d-none input-group-prepend d-none d-sm-flex">
                                     <button type="button" class="btn btn-link">
                                         <i class="fa fa-file-alt"></i>
                                     </button>
@@ -372,10 +349,27 @@
 import Pusher from 'pusher-js';
 import moment from 'moment';
 export default {
+        setup() {
+      // Get toast interface
+      const toast = useToast();
+
+    //   // Use it!
+    //   toast("I'm a toast!");
+
+    //   // or with options
+    //   toast.success("My toast content", {
+    //     timeout: 2000
+    //   });
+      // These options will override the options defined in the "app.use" plugin registration for this specific toast
+
+      // Make it available inside methods
+      return { toast }
+    },
   name: 'Chat',
   data() {
       return {
           messages: [],
+          persons: [],
           loadingMessage: false
       }
   },
@@ -408,7 +402,7 @@ export default {
                                 console.log(response)
 
                                 // this.getMessages()
-                                this.fireEvent()
+                          this.fireEvent()      
                                 // save token in localstorage
 
                                 // localStorage.setItem('token', response.data.token);
@@ -468,6 +462,29 @@ export default {
                 });
 
              
+        },
+        getPersons () {
+
+            //   this.loadingPersons = true;
+
+                    // alert('me too')
+
+                     this.axios.get(process.env.VUE_APP_URL+'/api/getPersons')
+                    .then(response => {
+                        // this.loadingPersons = false
+                        this.persons = response.data
+                        console.log(this.persons)
+
+                           
+
+                    }).catch(error => {
+                        // this.toast.eror("oops! an error")
+                      console.log(error.response)
+
+                    //   this.toast.info("I'm an info toast!");
+                });
+
+             
         }
           
   },
@@ -479,11 +496,15 @@ export default {
             this.channel = this.pusher.subscribe("newTask");
 
             console.log(this.channel)
-
+ 
             this.channel.bind("task-created", (data) => {
+                // alert('persons')
             // Method to be dispatched on trigger.
-                console.log(data)
+                // console.log(data)
                 this.getMessages()
+
+                this.getPersons()
+
                 // consol.log('thank God')
 
             });
@@ -495,6 +516,8 @@ export default {
   mounted() {
  
       this.getMessages()
+
+      this.fireEvent()
 
     //   this.$store.dispatch('logOut')
       console.log(this.$store.state.auth.token)
